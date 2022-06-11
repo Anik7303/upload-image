@@ -3,7 +3,7 @@ import { model } from "mongoose";
 
 // database interfaces
 import { IImage } from "../interfaces";
-import { generateError, getImageData } from "../utils";
+import { formatImages, generateError, getImageData } from "../utils";
 
 // database model
 const Images = model<IImage>("image");
@@ -61,6 +61,10 @@ export async function postImage(
       name: file!.filename,
     });
     await image.save();
+
+    if (req.file) {
+      await formatImages(req.file);
+    }
 
     res.status(201).json(getImageData(image));
   } catch (error) {
