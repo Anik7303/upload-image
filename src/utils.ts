@@ -1,4 +1,5 @@
 import path from "path";
+import fs from "fs/promises";
 import Str from "@supercharge/strings";
 import sharp from "sharp";
 
@@ -38,21 +39,41 @@ export async function formatImages(file: Express.Multer.File) {
 
   await sharp(file.path)
     .resize(40, 40)
-    .toFormat("jpg", { quality: 90 })
-    .toFile(`uploads/${filename}.thumbnail.jpg`);
+    .toFormat("png", { quality: 90 })
+    .toFile(`uploads/${filename}.thumbnail.png`);
 
   await sharp(file.path)
     .resize(320, 240)
-    .toFormat("jpg", { quality: 90 })
-    .toFile(`uploads/${filename}.small.jpg`);
+    .toFormat("png", { quality: 90 })
+    .toFile(`uploads/${filename}.small.png`);
 
   await sharp(file.path)
     .resize(640, 320)
-    .toFormat("jpg", { quality: 90 })
-    .toFile(`uploads/${filename}.medium.jpg`);
+    .toFormat("png", { quality: 90 })
+    .toFile(`uploads/${filename}.medium.png`);
 
   await sharp(file.path)
     .resize(1280, 1024)
-    .toFormat("jpg", { quality: 90 })
-    .toFile(`uploads/${filename}.hd.jpg`);
+    .toFormat("png", { quality: 90 })
+    .toFile(`uploads/${filename}.hd.png`);
+}
+
+export async function deleteImages(filename: string) {
+  const ext = path.extname(filename);
+  const name = filename.split(ext)[0];
+  const files = [
+    `${name}.thumbnail.png`,
+    `${name}.small.png`,
+    `${name}.medium.png`,
+    `${name}.hd.png`,
+    filename,
+  ];
+
+  files.forEach(async (file) => {
+    try {
+      await fs.unlink(path.join("uploads", file));
+    } catch (error) {
+      console.log(error);
+    }
+  });
 }

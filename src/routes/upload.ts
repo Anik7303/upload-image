@@ -11,6 +11,6 @@ const router = Router();
 router.get("/", getImages);
 router.get("/:id", getImage);
 router.post("/", uploadImage, postImage);
-router.delete("/", deleteImage);
+router.delete("/:id", deleteImage);
 
 export default router;

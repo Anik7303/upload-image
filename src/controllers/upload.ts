@@ -3,7 +3,12 @@ import { model } from "mongoose";
 
 // database interfaces
 import { IImage } from "../interfaces";
-import { formatImages, generateError, getImageData } from "../utils";
+import {
+  deleteImages,
+  formatImages,
+  generateError,
+  getImageData,
+} from "../utils";
 
 // database model
 const Images = model<IImage>("image");
@@ -83,7 +88,9 @@ export async function deleteImage(
 
     if (image) {
       await image.delete();
+      await deleteImages(image.name);
       res.status(200).json(getImageData(image));
+      return;
     }
 
     const error = new Error(`An image with id '${id}' not found.`);
