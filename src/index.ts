@@ -15,8 +15,7 @@ import "./models";
 // variables
 const HOST = process.env.HOST || "localhost";
 const PORT = process.env.PORT || "5000";
-const { DB_USER, DB_PASS, DB_NAME } = process.env;
-const DB_URI = `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.c2qje.mongodb.net/${DB_NAME}`;
+const DB_URI = process.env.DB_URI || "mongodb://localhost:27017/test";
 
 // middlewares
 import { customErrorMiddleware, error404 } from "./middlewares";

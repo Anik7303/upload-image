@@ -56,9 +56,7 @@ First add a `.env` file to project root directory. Example below-
 # example of .env file
 HOST="localhost"
 PORT=5000
-DB_NAME=<database_name> # mongo database name eg. test
-DB_USER=<database_username> # mongo database username eg. test
-DB_PASS=<database_password> # mongo database password eg. 12345678
+DB_URI=<DATABASE_URI> # eg. mongodb://localhost:27017/test
 ```
 
 Then run these commands -
@@ -69,5 +67,5 @@ npm i
 # create uploads folder in root directory
 mkdir uploads
 # run development server
-npm run dev
+npm run start
 ```
