@@ -1,5 +1,12 @@
 # Upload Image via REST API
 
+## Contents:
+
+- [Folder Structure](#folder-structure)
+- [API Routes](#api-routes)
+- [Packages Used](#packages-used)
+- [Instructions](#instructions)
+
 ## Folder Structure:
 
 ```
